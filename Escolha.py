@@ -1,10 +1,11 @@
 from INP import *
 from PDB import *
+import os
+import errno
 
-## VARIAVEL GLOBAL PARA ARMAZENAR O NOME DOS ARQUIVOS ##
-caminho = ""
 ## GLOBAL PARA DEFINIR O METODO E USAR NA EDIÇÃO E CÓPIA ##
 Novo_Metodo = ""
+
 ## METODOS ##
 Metodo_1 = '''! SP wB97X-d3 RIJCOSX def2-tzvp def2/J def2-tzvp/C TightSCF
 %pal nprocs 22 end 
@@ -23,8 +24,9 @@ Metodo_4 = '''! SP wB97X-d3 RIJCOSX def2-tzvp def2/J def2-tzvp/C TightSCF
 %maxcore 3000
 %scf Guess Hueckel end'''
 
-def tipo(tipo_arquivo,Moleculas,nome_original,Numero_Atm,Metodo_escolhido,Alterar_Nucleos,Nucleos,Alterar_Ram,Ram):
-    global caminho
+def tipo(tipo_arquivo,Moleculas,nome_original,Numero_Atm,Parametro,Metodo_escolhido,Alterar_Nucleos,Nucleos,Alterar_Ram,Ram):
+    
+    ## CAMINHO PARA O ARQUIVO ##
     caminho = ""
 
     ## DEFINE O METODO ##
@@ -70,13 +72,16 @@ def tipo(tipo_arquivo,Moleculas,nome_original,Numero_Atm,Metodo_escolhido,Altera
 
     ## VERIFICA SE O ARQUIVO É PDB ##
     if tipo_arquivo == "pdb":
-        Pdb_Manipulacao_Inicial(caminho,nome_certo,Moleculas,Numero_Atm,Metodo)
+        a = Pdb_Manipulacao_Inicial(caminho,nome_certo,Moleculas,Numero_Atm,Metodo,Parametro)
     
     ## VERIFICA SE O ARQUIVO INP ESCOLHIDO É VALIDO (RECEM SAÍDO DO AVOGRADO) ##
     elif tipo_arquivo == "inp" and Moleculas[:73] == Metodo_original:
-        Inp_Manipulacao_Inicial(caminho,nome_certo,Moleculas,Numero_Atm,Metodo)        
+        a = Inp_Manipulacao_Inicial(caminho,nome_certo,Moleculas,Numero_Atm,Metodo,Parametro)        
         return 0
     else:
         ## RETORNA 1 NA FUNÇÃO CASO O ARQUIVO SEJA INVALIDO PARA LEVANTARMOS UM ERRO NO INTERFACE.PY ##
         return 1
+    
+    ## CRIA O EXECUTÁVEL PARA CHAMAR O ORCA ##
+    Executavel(a[0],a[1])
     

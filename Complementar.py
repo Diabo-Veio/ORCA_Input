@@ -19,11 +19,11 @@ def Copia(caminho,Novo_Metodo,inicio,Moleculas,nome):
     return nome
 
 ## GERA O EXECUTAVEL PARA O ORCA ##
-#def Executavel():
-#    ## CAMINHO PARA O EXECUTAVEL QUE CHAMA O ORCA ##
-#    Executavel_Orca = Path(caminho + "Resultados/" + "Energias" + ".ps1")
-#    ## ESCREVE O ARQUIVO EXECUTÁVEL DO ORCA ##
-#    with open(Executavel_Orca,"w") as outfile:
-#        for i in Arquivos_gerados:
-#            out = i.removesuffix(".inp")
-#            outfile.write("C:\orca503\orca.exe " + i + " > " + out + ".out \n")
+def Executavel(Arquivos_gerados,caminho):
+    ## CAMINHO PARA O EXECUTAVEL QUE CHAMA O ORCA ##
+    Executavel_Orca = Path(caminho + "Resultados/" + "Energias" + ".ps1")
+    ## ESCREVE O ARQUIVO EXECUTÁVEL DO ORCA ##
+    with open(Executavel_Orca,"w") as outfile:
+        for i in Arquivos_gerados:
+            out = i.removesuffix(".inp")
+            outfile.write("C:\orca503\orca.exe " + i + " > " + out + ".out \n")

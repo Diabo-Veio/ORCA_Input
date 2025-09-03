@@ -1,9 +1,7 @@
 from io import StringIO
 from string import ascii_uppercase as alc
-from pathlib import Path
 from Complementar import *
-import os
-import errno
+
 
 #-----------------------------------------------------------------------------------#
 #-----------------------------------------------------------------------------------#
@@ -27,41 +25,41 @@ Metodo_original = '''# avogadro generated ORCA input file
 #-----------------------------------------------------------------------------------#
 #-----------------------------------------------------------------------------------#
 
-## ZERA A LISTA DE  ARQUIVOS GERADOS CASO O PROGRAMA SEJA EXECUTADO MAIS DE UMA VEZ ##
-def zerar():
-    global Arquivos_gerados
-    Arquivos_gerados = []
-
 ## METODO INICIAL PARA DEFINIR OS PÂMETROS PARA A MANIPULAÇÃO DAS STRINGS ##
-def Inp_Manipulacao_Inicial(caminho,nome,Moleculas,Numero_Atm,Metodo,Alterar_Nucleos,Nucleos,Alterar_Ram,Ram):
-    global Molecula, Molecula_Alvo, Arquivos_gerados
+def Inp_Manipulacao_Inicial(caminho,nome,Moleculas,Numero_Atm,Metodo,Parametro):
+    global Arquivos_gerados
 
     ## CONTADORES ##
     Atm = 0
     Molecula_Alvo = 0
-    Molecula = 1
 
     ## REMOVE O METODO INICIAL E O SEPARA O * QUE MARCA O INICIO DOS ATOMOS PARA DICIONARMOS DEPOIS ##
     inicio = Moleculas[73:84]
     Mol_Limpas = Moleculas[84:]
 
     ## DEFINE O NUMERO DE MOLECULAS A VERIFICAR ##
-    Numero_Mol = (Mol_Limpas.count("\n")-2)/Numero_Atm
+    if Parametro == 1:
+        Numero_Mol = (Mol_Limpas.count("\n")-2)/Numero_Atm
+    elif Parametro == 2:
+        Numero_Mol = Numero_Atm
+        Numero_Atm = (Mol_Limpas.count("\n")-2)/Numero_Mol
 
     ## CHAMA O METODO PARA EDITARMOS OS ARQUIVOS ##
     for i in range(int(Numero_Mol)):
         Molecula_Alvo += 1
         Texto = StringIO(Mol_Limpas)
-        Manipulacao(caminho,nome,Numero_Atm,Atm,Texto,Metodo,inicio,alc[i],Alterar_Nucleos,Nucleos,Alterar_Ram,Ram)
+        Manipulacao(caminho,nome,Numero_Atm,Atm,Texto,Metodo,inicio,alc[i],Molecula_Alvo)
         
     ## CRIA UMA CÓPIA DO ARQUIVO ORIGINAL NA PASTA DE RESULTADOS ##
     Texto = StringIO(Mol_Limpas)
-    arquivo_copiado = Copia(caminho,Novo_Metodo,inicio,Texto,nome)
+    arquivo_copiado = Copia(caminho,Metodo,inicio,Texto,nome)
     Arquivos_gerados.append(arquivo_copiado)
 
+    return([Arquivos_gerados,caminho])
+
 ## METODO PARA EDIÇÃO DE STRINGS ##
-def Manipulacao(caminho,nome_certo,Numero_Atm,Atm,Texto,Metodo,inicio,letra,Alterar_Nucleos,Nucleos,Alterar_Ram,Ram):
-    global Molecula, Arquivos_gerados,Novo_Metodo
+def Manipulacao(caminho,nome_certo,Numero_Atm,Atm,Texto,Metodo,inicio,letra,Molecula_Alvo):
+    global Arquivos_gerados
 
     ## LISTAS PARA INSERIRMOS AS LINHAS ##
     lista = []
