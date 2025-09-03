@@ -70,11 +70,11 @@ def tipo(tipo_arquivo,Moleculas,nome_original,Numero_Atm,Metodo_escolhido,Altera
 
     ## VERIFICA SE O ARQUIVO É PDB ##
     if tipo_arquivo == "pdb":
-        Pdb_Manipulacao_Inicial(caminho,nome_certo,Moleculas,Numero_Atm,Metodo,Alterar_Nucleos,Nucleos,Alterar_Ram,Ram)
+        Pdb_Manipulacao_Inicial(caminho,nome_certo,Moleculas,Numero_Atm,Metodo)
     
     ## VERIFICA SE O ARQUIVO INP ESCOLHIDO É VALIDO (RECEM SAÍDO DO AVOGRADO) ##
     elif tipo_arquivo == "inp" and Moleculas[:73] == Metodo_original:
-        Inp_Manipulacao_Inicial(caminho,nome_certo,Moleculas,Numero_Atm,Metodo,Alterar_Nucleos,Nucleos,Alterar_Ram,Ram)        
+        Inp_Manipulacao_Inicial(caminho,nome_certo,Moleculas,Numero_Atm,Metodo)        
         return 0
     else:
         ## RETORNA 1 NA FUNÇÃO CASO O ARQUIVO SEJA INVALIDO PARA LEVANTARMOS UM ERRO NO INTERFACE.PY ##
