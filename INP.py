@@ -17,7 +17,7 @@ Novo_Metodo = ""
 #-----------------------------------------------------------------------------------#
 #-----------------------------------------------------------------------------------#
 
-## MÉTODOS ##
+## MÉTODO ORIGINAL DO AVOGADRO ##
 Metodo_original = '''# avogadro generated ORCA input file 
 # Basic Mode
 # 
@@ -33,7 +33,7 @@ def zerar():
     Arquivos_gerados = []
 
 ## METODO INICIAL PARA DEFINIR OS PÂMETROS PARA A MANIPULAÇÃO DAS STRINGS ##
-def Inp_String_Manipulation(caminho,nome,Moleculas,Numero_Atm,Metodo,Alterar_Nucleos,Nucleos,Alterar_Ram,Ram):
+def Inp_Manipulacao_Inicial(caminho,nome,Moleculas,Numero_Atm,Metodo,Alterar_Nucleos,Nucleos,Alterar_Ram,Ram):
     global Molecula, Molecula_Alvo, Arquivos_gerados
 
     ## CONTADORES ##
@@ -52,14 +52,15 @@ def Inp_String_Manipulation(caminho,nome,Moleculas,Numero_Atm,Metodo,Alterar_Nuc
     for i in range(int(Numero_Mol)):
         Molecula_Alvo += 1
         Texto = StringIO(Mol_Limpas)
-        Manipulation(caminho,nome,Numero_Atm,Atm,Texto,Metodo,inicio,alc[i],Alterar_Nucleos,Nucleos,Alterar_Ram,Ram)
+        Manipulacao(caminho,nome,Numero_Atm,Atm,Texto,Metodo,inicio,alc[i],Alterar_Nucleos,Nucleos,Alterar_Ram,Ram)
         
     ## CRIA UMA CÓPIA DO ARQUIVO ORIGINAL NA PASTA DE RESULTADOS ##
     Texto = StringIO(Mol_Limpas)
-    Copia(caminho,Novo_Metodo,inicio,Texto,nome)
+    arquivo_copiado = Copia(caminho,Novo_Metodo,inicio,Texto,nome)
+    Arquivos_gerados.append(arquivo_copiado)
 
 ## METODO PARA EDIÇÃO DE STRINGS ##
-def Manipulation(caminho,nome_certo,Numero_Atm,Atm,Texto,Metodo,inicio,letra,Alterar_Nucleos,Nucleos,Alterar_Ram,Ram):
+def Manipulacao(caminho,nome_certo,Numero_Atm,Atm,Texto,Metodo,inicio,letra,Alterar_Nucleos,Nucleos,Alterar_Ram,Ram):
     global Molecula, Arquivos_gerados,Novo_Metodo
 
     ## LISTAS PARA INSERIRMOS AS LINHAS ##
@@ -110,33 +111,11 @@ def Manipulation(caminho,nome_certo,Numero_Atm,Atm,Texto,Metodo,inicio,letra,Alt
             elif  Molecula > Molecula_Alvo:
                 lista3.append(linha_rep)
             ## PASSA PARA O PRÓXIMO ÁTOMO ##
-            Atm += 1
-    
-    ##VERIFICA SE JA EXISTE UMA PASTA DE RESULTADOS ##
-    if not os.path.exists(os.path.dirname(caminho + "Resultados")):
-        try:
-            ## CRIA A PASTA DE RESULTADOS SE NÃO EXISTIR ##
-            os.mkdir(os.path.dirname(caminho + "Resultados/"))
-        except OSError as exc:
-            ## CASO DE ALGUM ERRO ##
-            if exc.errno != errno.EEXIST:
-                raise
-    
-    ##EDITA O METODO
-    if(Alterar_Nucleos):
-        a = Metodo.replace(Metodo[72:74], Nucleos)
-        Novo_Metodo = a
-        if(Alterar_Ram):
-            b = a.replace(Metodo[89:93], Ram)
-            Novo_Metodo = b
-    elif(Alterar_Ram):
-        a = Metodo.replace(Metodo[89:93], Ram)
-        Novo_Metodo = a
-    else: Novo_Metodo = Metodo
+            Atm += 1   
 
     ## ESCREVE O ARQUIVO ##
     with open(caminho + "Resultados/" + nome_completo,"w") as outfile:
-        outfile.write(Novo_Metodo)
+        outfile.write(Metodo)
         outfile.writelines("\n")
         outfile.write(inicio)
         outfile.writelines([str(i) for i in lista2])
