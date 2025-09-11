@@ -52,7 +52,7 @@ def Inp_Manipulacao_Inicial(caminho,nome,Moleculas,Numero_Atm,Metodo,Parametro):
         
     ## CRIA UMA CÓPIA DO ARQUIVO ORIGINAL NA PASTA DE RESULTADOS ##
     Texto = StringIO(Mol_Limpas)
-    arquivo_copiado = Copia(caminho,Metodo,inicio,Texto,nome)
+    arquivo_copiado = Copia(caminho,Metodo,inicio,Texto,nome+".inp")
     Arquivos_gerados.append(arquivo_copiado)
 
     return([Arquivos_gerados,caminho])

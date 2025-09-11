@@ -73,15 +73,15 @@ def tipo(tipo_arquivo,Moleculas,nome_original,Numero_Atm,Parametro,Metodo_escolh
     ## VERIFICA SE O ARQUIVO É PDB ##
     if tipo_arquivo == "pdb":
         a = Pdb_Manipulacao_Inicial(caminho,nome_certo,Moleculas,Numero_Atm,Metodo,Parametro)
-    
+        ## CRIA O EXECUTÁVEL PARA CHAMAR O ORCA ##
+        Executavel(a[0],a[1])
     ## VERIFICA SE O ARQUIVO INP ESCOLHIDO É VALIDO (RECEM SAÍDO DO AVOGRADO) ##
     elif tipo_arquivo == "inp" and Moleculas[:73] == Metodo_original:
-        a = Inp_Manipulacao_Inicial(caminho,nome_certo,Moleculas,Numero_Atm,Metodo,Parametro)        
+        a = Inp_Manipulacao_Inicial(caminho,nome_certo,Moleculas,Numero_Atm,Metodo,Parametro)   
+        ## CRIA O EXECUTÁVEL PARA CHAMAR O ORCA ##  
+        Executavel(a[0],a[1])   
         return 0
     else:
         ## RETORNA 1 NA FUNÇÃO CASO O ARQUIVO SEJA INVALIDO PARA LEVANTARMOS UM ERRO NO INTERFACE.PY ##
         return 1
-    
-    ## CRIA O EXECUTÁVEL PARA CHAMAR O ORCA ##
-    Executavel(a[0],a[1])
     
