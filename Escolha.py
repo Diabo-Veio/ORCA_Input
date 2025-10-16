@@ -24,10 +24,8 @@ Metodo_4 = '''! SP wB97X-d3 RIJCOSX def2-tzvp def2/J def2-tzvp/C TightSCF
 %maxcore 3000
 %scf Guess Hueckel end'''
 
-def tipo(tipo_arquivo,Moleculas,nome_original,Numero_Atm,Parametro,Metodo_escolhido,Alterar_Nucleos,Nucleos,Alterar_Ram,Ram):
+def tipo(tipo_arquivo,Moleculas,nome_original,Numero_Atm,Parametro,Metodo_escolhido,Alterar_Nucleos,Nucleos,Alterar_Ram,Ram,caminho):
     
-    ## CAMINHO PARA O ARQUIVO ##
-    caminho = ""
 
     ## DEFINE O METODO ##
     if Metodo_escolhido == 1:
@@ -49,16 +47,9 @@ def tipo(tipo_arquivo,Moleculas,nome_original,Numero_Atm,Parametro,Metodo_escolh
 
     ## REMOVE O SUFIXO ##
     if tipo_arquivo == "pdb":
-        nome = nome_original.removesuffix(".pdb")
+        nome_certo = nome_original.removesuffix(".pdb")
     else:
-        nome = nome_original.removesuffix(".inp")
-
-    ## DEFINE O CAMINHO PARA O ARQUIVO ##
-    res = nome.split("/", -1)
-    nome_certo = res[-1] if len(res) > 1 else ""
-    res.remove(nome_certo)
-    for i in res:
-        caminho += i + '/'
+        nome_certo = nome_original.removesuffix(".inp")
 
     ##VERIFICA SE JA EXISTE UMA PASTA DE RESULTADOS ##
     if not os.path.exists(caminho + "Resultados"):
