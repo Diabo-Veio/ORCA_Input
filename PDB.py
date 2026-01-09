@@ -59,7 +59,7 @@ def Pdb_Manipulacao(caminho,nome_completo,Linhas,Numero_Atm,Metodo,Parametro):
         ## PEGA AS COORDENADAS VIA REGEX ##
         temp = re.findall(r"[-+\s]?(?:\d*\.*\d+)", regiao_coordenadas)
         ## PEGA O ELEMENTO DA LINHA  E ADICIONA NA LISTA DE ELEMENTOS ##
-        elemento = linha[77:78]
+        elemento = linha[76:79]
         elementos.append(elemento)
         ## ADICIONA 00 AO FINAL DEVIDO AO PADRÃO DE PRECISÃO DO ORCA ##
         for i in temp:
@@ -131,7 +131,7 @@ def A_e_B (linhas_editadas,Numero_Atm,Metodo,caminho,nome_original,Atm,Molecula_
         ## INICIA A EDIÇÃO SE NÃO ESTAMOS NA MOLECULA ALVO ##
         elif Molecula < Molecula_Alvo or Molecula > Molecula_Alvo:
             ## EDITA A LINHA DA MOLECULA##
-            linha_rep = linha.replace(linha[3:5],linha[3]+":")
+            linha_rep = linha.replace(linha[3:6],linha[3:5]+":")
             ## ADICIONA A LINHA DA MOLECULA NA LISTA CORRETA ##
             if  Molecula < Molecula_Alvo:
                 lista2.append(linha_rep)
