@@ -141,7 +141,7 @@ def A_e_B (linhas_editadas,Numero_Atm,Metodo,caminho,nome_original,Atm,Molecula_
             Atm += 1   
 
     ## ESCREVE O ARQUIVO ##
-    with open(caminho + "Resultados/" + nome_completo,"w") as outfile:
+    with open(caminho + "Inputs/" + nome_completo,"w") as outfile:
         outfile.write(Metodo)
         outfile.writelines("\n\n* xyz 0 1\n")
         outfile.writelines([str(i) for i in lista2])

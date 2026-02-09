@@ -185,7 +185,7 @@ class App(tk.Tk):
     def Escolher_Arquivo(self):
 
         self.arquivos = abrir()
-
+        nome = ""
         for molecula in self.arquivos:
             nome = molecula.split("/", -1)
             nome_certo = nome[-1] if len(nome) > 1 else ""
