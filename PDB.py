@@ -73,7 +73,7 @@ def Pdb_Manipulacao(caminho,nome_completo,Linhas,Numero_Atm,Metodo,Parametro):
             linhas_editadas.append(f"   {elementos[coordenadas.index(i)]}     {i[0]:>10}     {i[1]:>10}     {i[2]:>10}\n")
 
     ## ESCREVE O ARQUIVO INP ##
-    with open(caminho + "Resultados/" + nome_completo,"w") as outfile:
+    with open(caminho + "Inputs/" + nome_completo,"w") as outfile:
         outfile.write(Metodo)
         outfile.writelines("\n\n* xyz 0 1\n")
         for i in linhas_editadas:

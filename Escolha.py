@@ -52,10 +52,10 @@ def tipo(tipo_arquivo,Moleculas,nome_original,Numero_Atm,Parametro,Metodo_escolh
         nome_certo = nome_original.removesuffix(".inp")
 
     ##VERIFICA SE JA EXISTE UMA PASTA DE RESULTADOS ##
-    if not os.path.exists(caminho + "Resultados"):
+    if not os.path.exists(caminho + "Inputs"):
         try:
             ## CRIA A PASTA DE RESULTADOS SE NÃO EXISTIR ##
-            os.mkdir(os.path.dirname(caminho + "Resultados/"))
+            os.mkdir(os.path.dirname(caminho + "Inputs/"))
         except OSError as exc:
             ## CASO DE ALGUM ERRO ##
             if exc.errno != errno.EEXIST:

@@ -112,7 +112,7 @@ def Manipulacao(caminho,nome_certo,Numero_Atm,Atm,Texto,Metodo,inicio,letra,Mole
             Atm += 1   
 
     ## ESCREVE O ARQUIVO ##
-    with open(caminho + "Resultados/" + nome_completo,"w") as outfile:
+    with open(caminho + "Inputs/" + nome_completo,"w") as outfile:
         outfile.write(Metodo)
         outfile.writelines("\n")
         outfile.write(inicio)

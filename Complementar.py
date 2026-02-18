@@ -10,7 +10,7 @@ def abrir():
 def Copia(caminho,Novo_Metodo,inicio,Moleculas,nome):
 
     ## ESCREVE O ARQUIVO DE SAIDA ##
-    with open(caminho + "Resultados/" + nome,"w") as outfile:
+    with open(caminho + "Inputs/" + nome,"w") as outfile:
         outfile.write(Novo_Metodo)
         outfile.writelines("\n")
         outfile.write(inicio)
@@ -21,7 +21,7 @@ def Copia(caminho,Novo_Metodo,inicio,Moleculas,nome):
 ## GERA O EXECUTAVEL PARA O ORCA ##
 def Executavel(Arquivos_gerados,caminho):
     ## CAMINHO PARA O EXECUTAVEL QUE CHAMA O ORCA ##
-    Executavel_Orca = Path(caminho + "Resultados/" + "Energias" + ".ps1")
+    Executavel_Orca = Path(caminho + "Inputs/" + "Energias" + ".ps1")
     ## ESCREVE O ARQUIVO EXECUTÁVEL DO ORCA ##
     with open(Executavel_Orca,"w") as outfile:
         for i in Arquivos_gerados:
